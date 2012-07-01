@@ -1,0 +1,1 @@
+This is a simple project you can use as a basis for a rake .Net course.
