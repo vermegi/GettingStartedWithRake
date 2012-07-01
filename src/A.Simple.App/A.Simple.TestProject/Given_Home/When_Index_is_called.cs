@@ -1,30 +1,21 @@
 ﻿using System.Web.Mvc;
 using A.Simple.App.Controllers;
 using A.Simple.App.Controllers.Interfaces;
+using A.Simple.TestProject.Util;
 using NUnit.Framework;
 using MvcContrib.TestHelper;
 
 namespace A.Simple.TestProject.Given_Home
 {
     [TestFixture]
-    public class When_Index_is_called
+    public class When_Index_is_called : ControllerTest<IHomeController>
     {
-        IHomeController _controller;
-        ActionResult _result;
-
-        [TestFixtureSetUp]
-        public void Setup()
-        {
-            Arrange();
-            Act();
-        }
-
-        void Arrange()
+        protected override void Arrange()
         {
             _controller = new HomeController();
         }
 
-        void Act()
+        protected override void Act()
         {
             _result = _controller.Index();
         }
