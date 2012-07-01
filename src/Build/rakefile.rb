@@ -1,7 +1,7 @@
 require 'albacore'
 
 @SOLUTION = "..\\A.Simple.App\\A.Simple.App.sln"
-@CONFIG = 'Debug'
+@CONFIG = ENV['CONFIG'] || 'Debug'
 
 desc "the default task"
 task :default => [:buildIt]
