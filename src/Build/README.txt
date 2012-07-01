@@ -1,3 +1,3 @@
-Run this first task with:
+Run the default task with:
 
-rake firstTask
+rake

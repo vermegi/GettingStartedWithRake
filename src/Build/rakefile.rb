@@ -1,4 +1,4 @@
 desc "a first task"
-task :firstTask do
+task :default do
 	puts "Hello, rake world!"
 end
