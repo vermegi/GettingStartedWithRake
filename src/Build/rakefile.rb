@@ -7,9 +7,9 @@ require './helper'
 @CONFIG = ENV['CONFIG'] || 'Debug'
 
 desc "the default task"
-task :default => [:buildIt, :publish, :migrate, :test]
+task :default => [:buildIt, :migrate, :test, :publish]
 task :migrate => [:migrate_down, :migrate_up]
-task :publish => [:deploy, :templates]
+task :publish => [:deploy, :templates, :create_zip]
 
 msbuild :buildIt do |msb|
 	msb.properties :configuration => @CONFIG
@@ -56,4 +56,9 @@ expandtemplate :templates do |exp|
     "templates/web.config" => "builds/#{@CONFIG}/web.config",
 	)
   exp.config = "templates/#{@CONFIG}.yml" 
+end
+
+zip :create_zip do |zip|
+     zip.directories_to_zip "builds/#{@CONFIG}"
+     zip.output_file = "../#{@CONFIG}.zip"
 end
