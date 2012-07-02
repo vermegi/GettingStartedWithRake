@@ -6,7 +6,7 @@ require 'albacore'
 @CONFIG = ENV['CONFIG'] || 'Debug'
 
 desc "the default task"
-task :default => [:buildIt, :publish]
+task :default => [:buildIt, :publish, :migrate]
 
 msbuild :buildIt do |msb|
 	msb.properties :configuration => @CONFIG
@@ -23,4 +23,12 @@ msbuild :publish do |msb|
   :outdir => "../../build/builds/#{@CONFIG}"
   }
   msb.solution = "#{@PROJECTFOLDER}/A.Simple.App.csproj"
+end
+
+migrate :migrate do |mgr|
+	migrator.command = '../A.Simple.App/packages/FluentMigrator.1.0.2.0/tools/Migrate.exe'
+	migrator.provider = 'sqlserver2008'
+	migrator.target = "../A.Simple.App/A.Simple.Migration/bin/#{@CONFIG}/A.Simple.Migration.dll"
+	migrator.connection = 'Data Source=.\\sqlexpress;Initial Catalog=simpledb;Integrated Security=true'
+	migrator.verbose = true
 end
