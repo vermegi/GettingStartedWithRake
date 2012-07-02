@@ -7,6 +7,7 @@ require 'albacore'
 
 desc "the default task"
 task :default => [:buildIt, :publish, :migrate]
+task :migrate => [:migrate_down, :migrate_up]
 
 msbuild :buildIt do |msb|
 	msb.properties :configuration => @CONFIG
@@ -25,10 +26,19 @@ msbuild :publish do |msb|
   msb.solution = "#{@PROJECTFOLDER}/A.Simple.App.csproj"
 end
 
-migrate :migrate do |mgr|
+fluentmigrator :migrate_up do |migrator|
 	migrator.command = '../A.Simple.App/packages/FluentMigrator.1.0.2.0/tools/Migrate.exe'
 	migrator.provider = 'sqlserver2008'
 	migrator.target = "../A.Simple.App/A.Simple.Migration/bin/#{@CONFIG}/A.Simple.Migration.dll"
 	migrator.connection = 'Data Source=.\\sqlexpress;Initial Catalog=simpledb;Integrated Security=true'
 	migrator.verbose = true
+end
+
+fluentmigrator :migrate_down do |migrator|
+	migrator.command = '../A.Simple.App/packages/FluentMigrator.1.0.2.0/tools/Migrate.exe'
+	migrator.provider = 'sqlserver2008'
+	migrator.target = "../A.Simple.App/A.Simple.Migration/bin/#{@CONFIG}/A.Simple.Migration.dll"
+	migrator.connection = 'Data Source=.\\sqlexpress;Initial Catalog=simpledb;Integrated Security=true'
+	migrator.verbose = true
+	migrator.task = 'rollback:all'
 end
