@@ -4,7 +4,6 @@ require 'albacore'
 @SOLUTION = "..\\A.Simple.App\\A.Simple.App.sln"
 @PROJECTFOLDER = "..\\A.Simple.App\\A.Simple.App"
 @CONFIG = ENV['CONFIG'] || 'Debug'
-@
 
 desc "the default task"
 task :default => [:buildIt, :publish, :migrate]
