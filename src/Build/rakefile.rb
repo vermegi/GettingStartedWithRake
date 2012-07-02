@@ -6,7 +6,7 @@ require 'albacore'
 @CONFIG = ENV['CONFIG'] || 'Debug'
 
 desc "the default task"
-task :default => [:buildIt, :publish, :migrate]
+task :default => [:buildIt, :publish, :migrate, :test]
 task :migrate => [:migrate_down, :migrate_up]
 
 msbuild :buildIt do |msb|
