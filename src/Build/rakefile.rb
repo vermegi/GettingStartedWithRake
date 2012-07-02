@@ -4,6 +4,7 @@ require 'albacore'
 @SOLUTION = "..\\A.Simple.App\\A.Simple.App.sln"
 @PROJECTFOLDER = "..\\A.Simple.App\\A.Simple.App"
 @CONFIG = ENV['CONFIG'] || 'Debug'
+@
 
 desc "the default task"
 task :default => [:buildIt, :publish, :migrate]
@@ -41,4 +42,10 @@ fluentmigrator :migrate_down do |migrator|
 	migrator.connection = 'Data Source=.\\sqlexpress;Initial Catalog=simpledb;Integrated Security=true'
 	migrator.verbose = true
 	migrator.task = 'rollback:all'
+end
+
+nunit :test do |nunit|
+	nunit.command = "#{@SOLUTIONFOLDER}/packages/NUnit.Runners.2.6.0.12051/tools/nunit-console.exe"
+	nunit.options "/framework=v4.0.30319", "/config=app.config"
+	nunit.assemblies "#{@SOLUTIONFOLDER}/A.Simple.TestProject/bin/#{@CONFIG}/A.Simple.TestProject.dll"
 end
