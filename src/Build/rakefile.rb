@@ -1,4 +1,5 @@
 require 'albacore'
+require './helper'
 
 @SOLUTIONFOLDER = "..\\A.Simple.App"
 @SOLUTION = "..\\A.Simple.App\\A.Simple.App.sln"
@@ -8,6 +9,7 @@ require 'albacore'
 desc "the default task"
 task :default => [:buildIt, :publish, :migrate, :test]
 task :migrate => [:migrate_down, :migrate_up]
+task :publish => [:deploy, :templates]
 
 msbuild :buildIt do |msb|
 	msb.properties :configuration => @CONFIG
@@ -16,7 +18,7 @@ msbuild :buildIt do |msb|
 end
 
 desc "Publish the web site"
-msbuild :publish do |msb|
+msbuild :deploy do |msb|
   msb.properties = {:configuration=>@CONFIG}
   msb.targets [:ResolveReferences,:_CopyWebApplication]
   msb.properties = {
@@ -47,4 +49,11 @@ nunit :test do |nunit|
 	nunit.command = "#{@SOLUTIONFOLDER}/packages/NUnit.Runners.2.6.0.12051/tools/nunit-console.exe"
 	nunit.options "/framework=v4.0.30319", "/config=app.config"
 	nunit.assemblies "#{@SOLUTIONFOLDER}/A.Simple.TestProject/bin/#{@CONFIG}/A.Simple.TestProject.dll"
+end
+
+expandtemplate :templates do |exp|
+  exp.templates(
+    "templates/web.config" => "builds/#{@CONFIG}/web.config",
+	)
+  exp.config = "templates/#{@CONFIG}.yml" 
 end
