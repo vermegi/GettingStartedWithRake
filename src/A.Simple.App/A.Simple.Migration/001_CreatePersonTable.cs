@@ -10,7 +10,7 @@ namespace A.Simple.Migrations
         public override void Up()
         {
             Create.Table(_tableName)
-                .WithColumn("Id").AsGuid().Identity()
+                .WithColumn("Id").AsInt64().Identity()
                 .WithColumn("FirstName").AsString(50)
                 .WithColumn("LastName").AsString(100);
         }
