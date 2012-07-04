@@ -1,9 +1,9 @@
 require 'albacore'
 require './helper'
 
-@SOLUTIONFOLDER = "..\\A.Simple.App"
-@SOLUTION = "..\\A.Simple.App\\A.Simple.App.sln"
-@PROJECTFOLDER = "..\\A.Simple.App\\A.Simple.App"
+@SOLUTIONFOLDER = "../A.Simple.App"
+@SOLUTION = "../A.Simple.App/A.Simple.App.sln"
+@PROJECTFOLDER = "../A.Simple.App/A.Simple.App"
 @CONFIG = ENV['CONFIG'] || 'Debug'
 
 desc "the default task"
