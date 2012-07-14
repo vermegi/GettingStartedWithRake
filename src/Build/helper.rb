@@ -1,6 +1,6 @@
-#---------------------------------------
-# Helper class
-#---------------------------------------
+#--------------------------------------------------------------------
+# Helper class: gives you the missing expandtampates task of albacore
+#--------------------------------------------------------------------
 class ExpandTemplate
   module GetBinding
     def get_binding
