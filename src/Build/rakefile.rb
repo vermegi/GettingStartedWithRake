@@ -29,7 +29,7 @@ msbuild :deploy do |msb|
   msb.solution = "#{@PROJECTFOLDER}/A.Simple.App.csproj"
 end
 
-desc "migrates the database up"
+desc "migrates the database up usng fluentmigrator"
 fluentmigrator :migrate_up do |migrator|
 	migrator.command = '../A.Simple.App/packages/FluentMigrator.1.0.2.0/tools/Migrate.exe'
 	migrator.provider = 'sqlserver2008'
@@ -38,7 +38,7 @@ fluentmigrator :migrate_up do |migrator|
 	migrator.verbose = true
 end
 
-desc "migrates the database down"
+desc "migrates the database down using fluentmigrator"
 fluentmigrator :migrate_down do |migrator|
 	migrator.command = '../A.Simple.App/packages/FluentMigrator.1.0.2.0/tools/Migrate.exe'
 	migrator.provider = 'sqlserver2008'
