@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A.Simple.App", "A.Simple.App\A.Simple.App.csproj", "{F78D6D0D-BE92-4D7A-B675-4E0B081E9D37}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A.Simple.BackEnd", "A.Simple.BackEnd\A.Simple.BackEnd.csproj", "{2042FAC5-D4C1-4DF5-90C8-998152DEA9F5}"
